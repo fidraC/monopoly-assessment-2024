@@ -1,7 +1,5 @@
 image: openjdk:17-jdk
 
-include:
-  - template: Code-Quality.gitlab-ci.yml
 
 default:
   tags:
@@ -12,7 +10,6 @@ default:
 stages:
   - assemble
   - build
-  - test
   - publish
   - deploy
 
