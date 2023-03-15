@@ -45,11 +45,15 @@ run{
 
 jar {
     manifest {
-        attributes 'Main-Class': 'com.cm6123.monopoly.app.Application'
+        attributes ('Main-Class': 'com.cm6123.monopoly.app.Application',
+        'Multi-Release','true')
+
     }
     from sourceSets.main.allSource
 
 }
+
+
 
 application {
     mainClassName = 'com.cm6123.monopoly.app.Application'
