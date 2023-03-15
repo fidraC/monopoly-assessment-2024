@@ -62,6 +62,7 @@ pages:
 
   script:
     - pwd
+    - mkdir --parents public/build/libs
     - mv ./build/reports/tests/ public
     - mv ./build/reports/checkstyle/ public
     - mv ./build/jacocoHtml/ public
