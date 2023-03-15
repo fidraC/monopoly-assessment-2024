@@ -5,7 +5,6 @@ plugins {
     id 'idea'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'info.solidsoft.pitest' version '1.7.0'
 
 }
 group 'com.nsa.cm6123-6623'
@@ -100,20 +99,6 @@ task buildAndMutateAndReport {
 task buildAndReport {
     dependsOn build, jacocoTestReport
 }
-
-
-pitest {
-    targetClasses = ['com.cm6123.monopoly.*']  //by default "${project.group}.*"
-    excludedClasses = ['com.cm6123.monopoly.app.*']
-    //pitestVersion = '1.4.1' //not needed when a default PIT version should be used
-    threads = 4
-    outputFormats = ['XML', 'HTML']
-    timestampedReports = false
-    junit5PluginVersion = '0.15'
-}
-
-//check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
-
 
 rootProject.tasks.named("jar") {
     duplicatesStrategy = 'include'
