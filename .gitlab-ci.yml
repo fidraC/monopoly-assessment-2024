@@ -43,7 +43,7 @@ build:gradle:
   only:
     - tags
   script:
-    - ./gradlew buildAndMutateAndReport
+    - ./gradlew buildAndReport
   artifacts:
     name: "$CI_JOB_NAME"
     paths:

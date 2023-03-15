@@ -92,9 +92,6 @@ jacocoTestCoverageVerification {
 }
 check.dependsOn jacocoTestCoverageVerification
 // create combined task
-task buildAndMutateAndReport {
-    dependsOn build, jacocoTestReport, "pitest"
-}
 
 task buildAndReport {
     dependsOn build, jacocoTestReport
