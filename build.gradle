@@ -125,5 +125,6 @@ pitest {
         mutationThreshold.set(40)
         maxSurviving.set(3)
     }
+    verbose = true
 
 }
