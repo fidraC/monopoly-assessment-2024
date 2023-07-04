@@ -110,7 +110,7 @@ rootProject.tasks.named("jar") {
 }
 
 pitest {
-    targetClasses = ['uk.ac.cf.cm6123.cardgames.*']  //by default "${project.group}.*"
+    targetClasses = ['com.cm6123.monopoly.game.*']  //by default "${project.group}.*"
     //pitestVersion = '1.9.0' //not needed when a default PIT version should be used
     threads = 4
     outputFormats = ['XML', 'HTML']
