@@ -8,8 +8,12 @@ default:
 
 
 stages:
+  - compile
+  - analyse
   - assemble
   - build
+  - code-coverage
+  - mutate
   - publish
 
 before_script:
@@ -24,12 +28,36 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
+compile:gradle:
+  stage: compile
+  only:
+    - tags
+  script:
+    - ./gradlew --continue compileJava
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - ./build/classes/java/main
+    expire_in: 4 week
+
+analyse:gradle:
+  stage: analyse
+  only:
+    - tags
+  script:
+    - ./gradlew --continue checkstyleMain
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - ./build/reports/checkstyle/
+    expire_in: 4 week
+
 assemble:gradle:
   stage: assemble
   only:
     - tags
   script:
-    - ./gradlew shadowJar
+    - ./gradlew  --continue shadowJar
   artifacts:
     name: "$CI_JOB_NAME"
     paths:
@@ -42,15 +70,35 @@ build:gradle:
   only:
     - tags
   script:
-    - ./gradlew buildAndReport
+    - ./gradlew  --continue build
   artifacts:
     name: "$CI_JOB_NAME"
     paths:
       - ./build/reports/tests/
-      - ./build/reports/checkstyle/
-      - ./build/jacocoHtml
       - ./build/libs/*.jar
+      - ./build/jacoco/test.exec
     expire_in: 4 week
+
+
+code-coverage:gradle:
+  stage: code-coverage
+  only:
+    - tags
+  script:
+    - ./gradlew  --continue jacocoTestReport
+    - ./gradlew  --continue jacocoTestCoverageVerification
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - ./build/jacocoHtml/
+    expire_in: 4 week
+
+mutate:gradle:
+  stage: mutate
+  only:
+    - tags
+  script:
+    - ./gradlew --continue pitest
 
 
 pages:
@@ -72,5 +120,4 @@ pages:
   artifacts:
     paths:
       - public
-
 

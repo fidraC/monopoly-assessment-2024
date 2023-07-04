@@ -4,9 +4,13 @@ plugins {
     id 'checkstyle'
     id 'idea'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.9.11'
     id 'com.github.johnrengelman.shadow' version '7.1.0'
 
 }
+
+apply plugin: 'info.solidsoft.pitest.aggregator' // to 'pitestReportAggregate' appear
+
 group 'com.nsa.cm6123-6623'
 version '1.0-SNAPSHOT'
 
@@ -103,4 +107,20 @@ task buildAndReport {
 
 rootProject.tasks.named("jar") {
     duplicatesStrategy = 'include'
+}
+
+pitest {
+    targetClasses = ['uk.ac.cf.cm6123.cardgames.*']  //by default "${project.group}.*"
+    //pitestVersion = '1.9.0' //not needed when a default PIT version should be used
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
+    junit5PluginVersion = '1.0.0'
+
+    reportAggregator {
+        testStrengthThreshold.set(50)
+        mutationThreshold.set(40)
+        maxSurviving.set(3)
+    }
+
 }
