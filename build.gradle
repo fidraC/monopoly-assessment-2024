@@ -114,11 +114,11 @@ rootProject.tasks.named("jar") {
 
 pitest {
     targetClasses = ['com.cm6123.monopoly.*']  //by default "${project.group}.*"
-    pitestVersion = '1.14.2' //not needed when a default PIT version should be used
+    pitestVersion = '1.9.11' //not needed when a default PIT version should be used
     threads = 4
     outputFormats = ['XML', 'HTML']
     timestampedReports = false
-    junit5PluginVersion = '1.2.0'
+    junit5PluginVersion = '1.1.2'
 
     reportAggregator {
         testStrengthThreshold.set(50)
@@ -126,4 +126,9 @@ pitest {
         maxSurviving.set(3)
     }
 
+
+
 }
+
+
+
