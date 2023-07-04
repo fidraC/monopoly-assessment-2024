@@ -15,6 +15,7 @@ group 'com.nsa.cm6123-6623'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -22,15 +23,15 @@ repositories {
 
 dependencies {
 
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
 
 
-    testImplementation(platform('org.junit:junit-bom:5.7.0'))
-    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
-    testImplementation('org.mockito:mockito-core:4.1.0')
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+    testImplementation(platform('org.junit:junit-bom:5.9.2'))
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
+    testImplementation('org.mockito:mockito-core:5.2.0')
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
 
 }
 
@@ -78,9 +79,11 @@ checkstyleMain {
 
 jacocoTestReport {
     reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+
+        //html.destination file("${buildDir}/jacocoHtml")
     }
 }
 jacocoTestCoverageVerification {
@@ -110,12 +113,12 @@ rootProject.tasks.named("jar") {
 }
 
 pitest {
-    targetClasses = ['com.cm6123.monopoly.game.*']  //by default "${project.group}.*"
-    //pitestVersion = '1.9.0' //not needed when a default PIT version should be used
+    targetClasses = ['com.cm6123.monopoly.*']  //by default "${project.group}.*"
+    pitestVersion = '1.14.2' //not needed when a default PIT version should be used
     threads = 4
     outputFormats = ['XML', 'HTML']
     timestampedReports = false
-    junit5PluginVersion = '1.0.0'
+    junit5PluginVersion = '1.2.0'
 
     reportAggregator {
         testStrengthThreshold.set(50)
