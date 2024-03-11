@@ -8,12 +8,7 @@ default:
 
 
 stages:
-  - compile
-  - analyse
-  - assemble
   - build
-  - code-coverage
-  - mutate
   - publish
 
 before_script:
@@ -24,82 +19,35 @@ before_script:
   - rm -fr .gradle/caches/*/plugin-resolution/
   - chmod +x gradlew
 cache:
+  key: gradle-cache-key
   paths:
     - .gradle/wrapper
     - .gradle/caches
-
-compile:gradle:
-  stage: compile
-  only:
-    - tags
-  script:
-    - ./gradlew --continue compileJava
-  artifacts:
-    name: "$CI_JOB_NAME"
-    paths:
-      - ./build/classes/java/main
-    expire_in: 4 week
-
-analyse:gradle:
-  stage: analyse
-  only:
-    - tags
-  script:
-    - ./gradlew --continue checkstyleMain
-  artifacts:
-    name: "$CI_JOB_NAME"
-    paths:
-      - ./build/reports/checkstyle/
-    expire_in: 4 week
-
-assemble:gradle:
-  stage: assemble
-  only:
-    - tags
-  script:
-    - ./gradlew  --continue shadowJar
-  artifacts:
-    name: "$CI_JOB_NAME"
-    paths:
-      - ./build/libs/*.jar
-    expire_in: 4 week
-
+  policy: pull
 
 build:gradle:
   stage: build
   only:
     - tags
   script:
-    - ./gradlew  --continue build
+
+    - ./gradlew --continue buildAndReport
+  cache:
+    key: gradle-cache-key
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
   artifacts:
     name: "$CI_JOB_NAME"
     paths:
+      - ./build/classes/java/main
+      - ./build/reports/checkstyle/
+      - ./build/jacocoHtml/
       - ./build/reports/tests/
       - ./build/libs/*.jar
       - ./build/jacoco/test.exec
+
     expire_in: 4 week
-
-
-code-coverage:gradle:
-  stage: code-coverage
-  only:
-    - tags
-  script:
-    - ./gradlew  --continue jacocoTestReport
-    - ./gradlew  --continue jacocoTestCoverageVerification
-  artifacts:
-    name: "$CI_JOB_NAME"
-    paths:
-      - ./build/jacocoHtml/
-    expire_in: 4 week
-
-mutate:gradle:
-  stage: mutate
-  only:
-    - tags
-  script:
-    - ./gradlew --continue pitest
-
 
 pages:
 
@@ -116,6 +64,12 @@ pages:
     - mv ./build/libs/*.jar public/build/libs
     - pwd
     - ls -lR public
+
+  cache:
+    key: gradle-cache-key
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
 
   artifacts:
     paths:
