@@ -5,7 +5,7 @@ plugins {
     id 'idea'
     id 'application'
     id 'info.solidsoft.pitest' version '1.9.11'
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 
 }
 
@@ -77,6 +77,11 @@ checkstyleMain {
     maxErrors = 10
 }
 
+jacoco {
+    toolVersion = "0.8.11"
+    //reportsDirectory = layout.buildDirectory.dir('jacocoHtml')
+}
+
 jacocoTestReport {
     reports {
         xml.required = false
@@ -125,7 +130,7 @@ pitest {
         mutationThreshold.set(40)
         maxSurviving.set(3)
     }
-    verbose = true
+    //verbose = true
 
 
 
