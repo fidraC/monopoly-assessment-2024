@@ -1,0 +1,215 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.cm6123.monopoly.game.Monopoly",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1358360154 { 
+   	label=cm6123
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_71238775 { 
+   	label=monopoly
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Board1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Board</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   spaces: Space[] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ space(index: Integer): Space</TD></TR>
+<TR><TD ALIGN="LEFT" >+ spaces(): Space[]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Dice1764509429[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Dice</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   faces: Integer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ roll(): Integer</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Monopoly1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Monopoly</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentPlayerIndex: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   hasActed: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   players: Player[] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ bankrupt(player: Player)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buy()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ roll()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Payment1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Payment</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   target: Target [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ amount(): Integer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ target(): Target</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Player1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Player</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   balance: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   boardSize: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   location: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ String(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ balance(): Integer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deposit(amount: Integer)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ location(): Integer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ withdraw(amount: Integer)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Space1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Space</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   label: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   owner: Player [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rent: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spaceType: Spaces [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ getPayment(player: Player, roll1: Integer, roll2: Integer): Payment</TD></TR>
+<TR><TD ALIGN="LEFT" >+ owner(): Player</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Board1764427434 -> Space1764427434[label="spaces
+[0..*]"];
+Monopoly1764427434 -> Board1764427434[label="board
+[0..1]"];
+Monopoly1764427434 -> Player1764427434[label="players
+[0..*]"];
+Space1764427434 -> Player1764427434[label="owner
+[0..1]"];
+    
+}
+@enduml
