@@ -1,10 +1,10 @@
 image: openjdk:17-alpine
 
 
-default:
-  tags:
-    - comsc-ci
-    #- general-docker
+# default:
+#   tags:
+#     - comsc-ci
+#     #- general-docker
 
 
 stages:
@@ -27,8 +27,8 @@ cache:
 
 build:gradle:
   stage: build
-  only:
-    - tags
+  # only:
+  #   - tags
   script:
 
     - ./gradlew --continue buildAndReport
@@ -52,8 +52,8 @@ build:gradle:
 pages:
 
   stage: publish
-  only:
-    - tags
+  # only:
+  #   - tags
 
   script:
     - pwd
