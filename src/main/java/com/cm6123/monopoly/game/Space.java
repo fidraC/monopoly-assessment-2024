@@ -1,18 +1,17 @@
 package com.cm6123.monopoly.game;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * The base class for a space on the board. It is abstract and should be extended by all other
  * spaces.
  */
 public abstract class Space {
-  private static Logger logger = LoggerFactory.getLogger(Space.class);
 
   /**
    * A space can make a player do something when they land on it. For example, the Home space gives
    * the player $200 while a rental property forces the player to pay rent.
+   *
+   * @param player the player landing on the space.
+   * @return the next action for the player.
    */
   public abstract NextAction action(Player player);
 
@@ -24,20 +23,35 @@ public abstract class Space {
    */
   abstract boolean canBuy();
 
-  abstract boolean internalBuy(Player player);
+  /**
+   * An internal method to be extended to buy the space. This will be called by the buy method if
+   * the space can be bought.
+   *
+   * @param player the player buying the space.
+   * @return true if the player bought the space, false otherwise.
+   */
+  boolean internalBuy(final Player player) {
+    return false;
+  }
 
-  /** The name of the space could be the type of space or the name of the property. */
+  /**
+   * The name of the space could be the type of space or the name of the property.
+   *
+   * @return the name of the space.
+   */
   public abstract String getName();
 
   /**
    * Sets the owner of the space to the player if the property can be bought and is not already
    * owned.
+   *
+   * @param player the player buying the space.
+   * @return true if the player bought the space, false otherwise.
    */
-  public boolean buy(Player player) {
+  public boolean buy(final Player player) {
     if (this.canBuy()) {
       return this.internalBuy(player);
     }
-    logger.error("Player cannot buy this space");
     return false;
   }
 }
