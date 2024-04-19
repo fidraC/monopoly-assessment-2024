@@ -1,5 +1,4 @@
-image: openjdk:17-alpine
-
+image: eclipse-temurin:21
 
 # default:
 #   tags:
