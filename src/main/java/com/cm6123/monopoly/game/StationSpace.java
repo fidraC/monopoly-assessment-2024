@@ -1,5 +1,8 @@
 package com.cm6123.monopoly.game;
 
+import com.github.javafaker.Faker;
+import java.util.Locale;
+
 /**
  * Unlike the real monopoly, the station cannot be bought. Players pay a fee when they land on it.
  */
@@ -17,8 +20,8 @@ public class StationSpace extends Space {
    */
   public StationSpace(final int unitFee) {
     this.fee = unitFee;
-    // TODO: Use faker to generate a random station name.
-    this.stationName = "Station";
+    Faker faker = new Faker(new Locale.Builder().setLanguage("en").setRegion("GB").build());
+    this.stationName = faker.harryPotter().spell();
   }
 
   /**
@@ -54,6 +57,6 @@ public class StationSpace extends Space {
    */
   @Override
   public String getName() {
-    return stationName;
+    return stationName + " Station";
   }
 }

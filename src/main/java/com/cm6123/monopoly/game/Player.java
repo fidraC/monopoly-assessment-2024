@@ -22,7 +22,7 @@ public class Player {
   private int balance;
 
   /** The last roll of the two dice for the player. */
-  protected int[] lastRoll = new int[2];
+  private int[] lastRoll = new int[2];
 
   /**
    * Create a player with a name and a balance.
