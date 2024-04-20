@@ -13,9 +13,16 @@ import org.junit.jupiter.api.Test;
 /** Tests for the Space class. */
 public class SpaceChecks {
   class TestPlayer extends Player {
+    private int[] lastRoll;
+
     public TestPlayer(int roll1, int roll2) {
       super("Test Player");
       this.lastRoll = new int[] {roll1, roll2};
+    }
+
+    @Override
+    public int[] getLastRoll() {
+      return lastRoll;
     }
   }
 
@@ -38,6 +45,7 @@ public class SpaceChecks {
     assertTrue(space.buy(player));
     assertTrue(player.getBalance() == initialBalance - 200);
     assertTrue(space.getOwner() == player);
+    System.out.println("Property name: " + space.getName());
   }
 
   @Test
@@ -92,6 +100,14 @@ public class SpaceChecks {
     assertTrue(player.getBalance() == initialBalance - 300);
     player.deduct(player.getBalance());
     assertTrue(space.action(player) == NextAction.BANKRUPT);
+  }
+
+  @Test
+  void testStationName() {
+    StationSpace space = new StationSpace(100);
+    System.out.println(space.getName());
+    assertTrue(space.getName().endsWith(" Station"));
+    assertTrue(space.getName().length() > 9);
   }
 
   @Test

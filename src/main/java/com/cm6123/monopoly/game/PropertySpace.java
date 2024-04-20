@@ -1,5 +1,8 @@
 package com.cm6123.monopoly.game;
 
+import com.github.javafaker.Faker;
+import java.util.Locale;
+
 /**
  * A property is a space that can be bought by the player. A player landing on it that is not the
  * owner will have to pay rent.
@@ -25,8 +28,8 @@ public final class PropertySpace extends Space {
   public PropertySpace(final int val) {
     this.value = val;
     this.owner = null;
-    // TODO: Use faker to generate a random property name.
-    this.propertyName = "Property";
+    Faker faker = new Faker(new Locale.Builder().setLanguage("en").setRegion("GB").build());
+    this.propertyName = faker.address().streetName();
   }
 
   /**
