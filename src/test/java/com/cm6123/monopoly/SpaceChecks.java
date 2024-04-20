@@ -6,6 +6,7 @@ import com.cm6123.monopoly.game.HomeSpace;
 import com.cm6123.monopoly.game.NextAction;
 import com.cm6123.monopoly.game.Player;
 import com.cm6123.monopoly.game.PropertySpace;
+import com.cm6123.monopoly.game.RoadSpace;
 import com.cm6123.monopoly.game.StationSpace;
 import com.cm6123.monopoly.game.TaxOfficeSpace;
 import org.junit.jupiter.api.Test;
@@ -116,5 +117,14 @@ public class SpaceChecks {
     player.roll();
     assertTrue(player.getLastRoll()[0] >= 1 && player.getLastRoll()[0] <= 6);
     assertTrue(player.getLastRoll()[1] >= 1 && player.getLastRoll()[1] <= 6);
+  }
+
+  @Test
+  void testRoad() {
+    RoadSpace space = new RoadSpace();
+    Player player = new Player("Test Player");
+    int initialBalance = player.getBalance();
+    assertTrue(space.action(player) == NextAction.END_TURN);
+    assertTrue(player.getBalance() == initialBalance);
   }
 }
