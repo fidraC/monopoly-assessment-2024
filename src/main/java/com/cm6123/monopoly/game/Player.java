@@ -1,15 +1,23 @@
 package com.cm6123.monopoly.game;
 
+import com.cm6123.monopoly.dice.Dice;
+
 /** The player class represents a player in the game. */
 public class Player {
   /** The starting balance for a player. */
   private static final int STARTING_BALANCE = 1000;
+
+  /** The dice shared by all players. */
+  private static final Dice DICE = new Dice(6);
 
   /** The name of the player. */
   private String name;
 
   /** The balance of the player. */
   private int balance;
+
+  /** The last roll of the two dice for the player. */
+  private int[] lastRoll = new int[2];
 
   /**
    * Create a player with a name and a balance.
@@ -60,5 +68,20 @@ public class Player {
    */
   public String getName() {
     return name;
+  }
+
+  /** Rolls the dice for the player. */
+  public void roll() {
+    lastRoll[0] = DICE.roll();
+    lastRoll[1] = DICE.roll();
+  }
+
+  /**
+   * Returns the last roll of the dice.
+   *
+   * @return the last roll of the dice.
+   */
+  public int[] getLastRoll() {
+    return lastRoll;
   }
 }
