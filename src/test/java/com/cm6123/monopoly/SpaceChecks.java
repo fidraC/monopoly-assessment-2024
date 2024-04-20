@@ -6,6 +6,7 @@ import com.cm6123.monopoly.game.HomeSpace;
 import com.cm6123.monopoly.game.NextAction;
 import com.cm6123.monopoly.game.Player;
 import com.cm6123.monopoly.game.PropertySpace;
+import com.cm6123.monopoly.game.TaxOfficeSpace;
 import org.junit.jupiter.api.Test;
 
 /** Tests for the Space class. */
@@ -56,5 +57,31 @@ public class SpaceChecks {
     space.action(player);
     assertTrue(player.getBalance() == initialBalance - 20);
     assertTrue(owner.getBalance() == ownerInitialBalance + 20);
+  }
+
+  @Test
+  void testTaxOfficeSpace() {
+    class TestPlayer extends Player {
+      private int[] lastRoll;
+
+      @Override
+      public int[] getLastRoll() {
+        return lastRoll;
+      }
+
+      public TestPlayer(int roll1, int roll2) {
+        super("Test Player");
+        this.lastRoll = new int[] {roll1, roll2};
+      }
+    }
+
+    Player player = new TestPlayer(4, 5);
+    int initialBalance = player.getBalance();
+    TaxOfficeSpace space = new TaxOfficeSpace();
+    space.action(player);
+    assertTrue(player.getBalance() == initialBalance - Math.ceil(initialBalance * 9 / 100.0));
+    player = new TestPlayer(6, 6);
+    space.action(player);
+    assertTrue(player.getBalance() == initialBalance - Math.ceil(initialBalance * 6 / 100.0));
   }
 }
