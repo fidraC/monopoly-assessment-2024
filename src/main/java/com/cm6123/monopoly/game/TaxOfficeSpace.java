@@ -23,8 +23,11 @@ public class TaxOfficeSpace extends Space {
       taxPercentage = roll[0] + roll[1];
     }
     final int tax = (int) Math.ceil(player.getBalance() * taxPercentage / 100.0);
-    player.deduct(tax);
-    return NextAction.END_TURN;
+    if (player.deduct(tax)) {
+      return NextAction.END_TURN;
+    } else {
+      return NextAction.BANKRUPT;
+    }
   }
 
   /**

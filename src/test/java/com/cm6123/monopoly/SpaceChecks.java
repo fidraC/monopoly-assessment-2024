@@ -6,11 +6,19 @@ import com.cm6123.monopoly.game.HomeSpace;
 import com.cm6123.monopoly.game.NextAction;
 import com.cm6123.monopoly.game.Player;
 import com.cm6123.monopoly.game.PropertySpace;
+import com.cm6123.monopoly.game.StationSpace;
 import com.cm6123.monopoly.game.TaxOfficeSpace;
 import org.junit.jupiter.api.Test;
 
 /** Tests for the Space class. */
 public class SpaceChecks {
+  class TestPlayer extends Player {
+    public TestPlayer(int roll1, int roll2) {
+      super("Test Player");
+      this.lastRoll = new int[] {roll1, roll2};
+    }
+  }
+
   @Test
   void testHomeSpace() {
     HomeSpace space = new HomeSpace();
@@ -57,23 +65,13 @@ public class SpaceChecks {
     space.action(player);
     assertTrue(player.getBalance() == initialBalance - 20);
     assertTrue(owner.getBalance() == ownerInitialBalance + 20);
+    // Test bankrupt
+    player.deduct(player.getBalance());
+    assertTrue(space.action(player) == NextAction.BANKRUPT);
   }
 
   @Test
   void testTaxOfficeSpace() {
-    class TestPlayer extends Player {
-      private int[] lastRoll;
-
-      @Override
-      public int[] getLastRoll() {
-        return lastRoll;
-      }
-
-      public TestPlayer(int roll1, int roll2) {
-        super("Test Player");
-        this.lastRoll = new int[] {roll1, roll2};
-      }
-    }
 
     Player player = new TestPlayer(4, 5);
     int initialBalance = player.getBalance();
@@ -83,5 +81,24 @@ public class SpaceChecks {
     player = new TestPlayer(6, 6);
     space.action(player);
     assertTrue(player.getBalance() == initialBalance - Math.ceil(initialBalance * 6 / 100.0));
+  }
+
+  @Test
+  void testStationFee() {
+    Player player = new TestPlayer(1, 2);
+    StationSpace space = new StationSpace(100);
+    int initialBalance = player.getBalance();
+    space.action(player);
+    assertTrue(player.getBalance() == initialBalance - 300);
+    player.deduct(player.getBalance());
+    assertTrue(space.action(player) == NextAction.BANKRUPT);
+  }
+
+  @Test
+  void testPlayerRoll() {
+    Player player = new Player("Test Player");
+    player.roll();
+    assertTrue(player.getLastRoll()[0] >= 1 && player.getLastRoll()[0] <= 6);
+    assertTrue(player.getLastRoll()[1] >= 1 && player.getLastRoll()[1] <= 6);
   }
 }
