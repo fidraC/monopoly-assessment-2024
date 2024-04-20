@@ -5,5 +5,7 @@ public enum NextAction {
   /** The player MUST end their turn. */
   END_TURN,
   /** The player CAN buy the property. */
-  BUY
+  BUY,
+  /** Attempt to run bankruptcy on the player. */
+  BANKRUPT,
 }

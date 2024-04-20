@@ -1,9 +1,14 @@
 package com.cm6123.monopoly.game;
 
 import com.cm6123.monopoly.dice.Dice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** The player class represents a player in the game. */
 public class Player {
+  /** Logger for the Player class. */
+  private static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
+
   /** The starting balance for a player. */
   private static final int STARTING_BALANCE = 1000;
 
@@ -17,7 +22,7 @@ public class Player {
   private int balance;
 
   /** The last roll of the two dice for the player. */
-  private int[] lastRoll = new int[2];
+  protected int[] lastRoll = new int[2];
 
   /**
    * Create a player with a name and a balance.

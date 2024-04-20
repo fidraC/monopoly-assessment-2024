@@ -14,6 +14,9 @@ public final class PropertySpace extends Space {
   /** The owner of the property. Can be null. */
   private Player owner;
 
+  /** The name of the property. */
+  private final String propertyName;
+
   /**
    * Create a new property space with a value.
    *
@@ -22,6 +25,8 @@ public final class PropertySpace extends Space {
   public PropertySpace(final int val) {
     this.value = val;
     this.owner = null;
+    // TODO: Use faker to generate a random property name.
+    this.propertyName = "Property";
   }
 
   /**
@@ -43,9 +48,12 @@ public final class PropertySpace extends Space {
   @Override
   public NextAction action(final Player player) {
     if (this.owner != null && this.owner != player) {
-      player.deduct(this.getRent());
       this.owner.add(this.getRent());
-      return NextAction.END_TURN;
+      if (player.deduct(this.getRent())) {
+        return NextAction.END_TURN;
+      } else {
+        return NextAction.BANKRUPT;
+      }
     } else {
       return NextAction.BUY;
     }
@@ -84,7 +92,7 @@ public final class PropertySpace extends Space {
    */
   @Override
   public String getName() {
-    return "Property";
+    return this.propertyName;
   }
 
   /**
