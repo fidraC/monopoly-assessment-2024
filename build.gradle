@@ -4,8 +4,8 @@ plugins {
     id 'checkstyle'
     id 'idea'
     id 'application'
-    id 'info.solidsoft.pitest' version '1.9.11'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'info.solidsoft.pitest' version '1.15.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 
 }
 
@@ -14,11 +14,13 @@ apply plugin: 'info.solidsoft.pitest.aggregator' // to 'pitestReportAggregate' a
 group 'com.nsa.cm6123-6623'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 21
-targetCompatibility = 21
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
@@ -26,6 +28,7 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.23.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.23.1'
+		implementation 'com.github.javafaker:javafaker:1.0.2'
 
 
     testImplementation(platform('org.junit:junit-bom:5.9.2'))
@@ -40,6 +43,7 @@ test{
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+        showStandardStreams = true
     }
 }
 //application configuration
@@ -61,8 +65,7 @@ jar {
 
 
 application {
-    mainClassName = 'com.cm6123.monopoly.app.Application'
-
+    mainClass = 'com.cm6123.monopoly.app.Application'
 }
 
 //tool configuration
