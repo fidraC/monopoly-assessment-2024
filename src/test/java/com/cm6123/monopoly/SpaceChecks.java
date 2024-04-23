@@ -46,7 +46,6 @@ public class SpaceChecks {
     assertTrue(space.buy(player));
     assertTrue(player.getBalance() == initialBalance - 200);
     assertTrue(space.getOwner() == player);
-    System.out.println("Property name: " + space.getName());
   }
 
   @Test
@@ -77,6 +76,10 @@ public class SpaceChecks {
     // Test bankrupt
     player.deduct(player.getBalance());
     assertTrue(space.action(player) == NextAction.BANKRUPT);
+    // Test owner is not charged if lands on own property
+    initialBalance = owner.getBalance();
+    space.action(owner);
+    assertTrue(owner.getBalance() == initialBalance);
   }
 
   @Test
@@ -106,7 +109,6 @@ public class SpaceChecks {
   @Test
   void testStationName() {
     StationSpace space = new StationSpace(100);
-    System.out.println(space.getName());
     assertTrue(space.getName().endsWith(" Station"));
     assertTrue(space.getName().length() > 9);
   }

@@ -6,6 +6,7 @@ package com.cm6123.monopoly.game;
  * dice.
  */
 public class TaxOfficeSpace extends Space {
+
   /**
    * The tax office takes a percentage of the player's balance that is the sum of their roll, unless
    * it is a double. If it's a double, the percentage is the value of 1 dice.

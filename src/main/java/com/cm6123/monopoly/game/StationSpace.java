@@ -13,6 +13,15 @@ public class StationSpace extends Space {
   /** The name of the station. */
   private final String stationName;
 
+  /** The minimum unit fee of the station. */
+  private static final int MIN_UNIT_FEE = 5; // 5 * 2 = 10
+
+  /**
+   * The maximum unit fee of the station. This is made to try and match the maximum rent of a
+   * property (50)
+   */
+  private static final int MAX_UNIT_FEE = 10; // 10 * 12 = 120
+
   /**
    * Creates a new station space with a fee.
    *
@@ -22,6 +31,11 @@ public class StationSpace extends Space {
     this.fee = unitFee;
     Faker faker = new Faker(new Locale.Builder().setLanguage("en").setRegion("GB").build());
     this.stationName = faker.harryPotter().spell();
+  }
+
+  /** Creates a new station space with a random fee. */
+  public StationSpace() {
+    this(new Faker().number().numberBetween(MIN_UNIT_FEE, MAX_UNIT_FEE));
   }
 
   /**

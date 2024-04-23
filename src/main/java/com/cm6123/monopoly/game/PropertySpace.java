@@ -11,6 +11,12 @@ public final class PropertySpace extends Space {
   /** Temporary rent percentage. */
   private static final int RENT_PERCENTAGE = 10;
 
+  /** The minimum value of the property. */
+  private static final int MIN_VALUE = 100;
+
+  /** The maximum value of the property. */
+  private static final int MAX_VALUE = 500;
+
   /** The value of the property. */
   private int value;
 
@@ -30,6 +36,11 @@ public final class PropertySpace extends Space {
     this.owner = null;
     Faker faker = new Faker(new Locale.Builder().setLanguage("en").setRegion("GB").build());
     this.propertyName = faker.address().streetName();
+  }
+
+  /** Create a property space with a random value. */
+  public PropertySpace() {
+    this(new Faker().number().numberBetween(MIN_VALUE, MAX_VALUE));
   }
 
   /**
