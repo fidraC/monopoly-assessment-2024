@@ -68,10 +68,11 @@ public class Player {
    * Bankrupt the player. This will sell the player's properties from the least expensive to the
    * most expensive until the player has enough money to pay off their debts.
    *
-   * @param debt the amount of money the player owes.
+   * @param debts the amount of money the player owes.
    * @return whether the player was able to pay off their debt.
    */
-  public boolean bankrupt(int debt) {
+  public boolean bankrupt(final int debts) {
+    var debt = debts;
     while (debt > 0 && properties.size() > 0) {
       PropertySpace property = properties.remove(0);
       property.removeOwner();
