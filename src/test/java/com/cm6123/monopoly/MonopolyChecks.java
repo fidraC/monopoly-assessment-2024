@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /** Tests for the Monopoly class. */
 public class MonopolyChecks {
   @Test
-  void testMonopoly() {
+  void testMonopolyInitialization() {
     String input = "2\nPlayer 1\nPlayer 2\n";
     InputStream in = new ByteArrayInputStream(input.getBytes());
     CommandLineInterface ui = new CommandLineInterface(in);
