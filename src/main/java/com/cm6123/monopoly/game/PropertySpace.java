@@ -44,6 +44,15 @@ public final class PropertySpace extends Space {
   }
 
   /**
+   * Get the value of the property.
+   *
+   * @return the value of the property.
+   */
+  public int getValue() {
+    return this.value;
+  }
+
+  /**
    * Get the rent value of the property.
    *
    * @return the rent value.
@@ -93,6 +102,7 @@ public final class PropertySpace extends Space {
   protected boolean internalBuy(final Player player) {
     if (player.deduct(this.value)) {
       this.owner = player;
+      this.owner.addProperty(this);
       return true;
     } else {
       return false;
@@ -116,5 +126,10 @@ public final class PropertySpace extends Space {
    */
   public Player getOwner() {
     return owner;
+  }
+
+  /** Remove the owner of the property. */
+  public void removeOwner() {
+    this.owner = null;
   }
 }

@@ -91,9 +91,21 @@ public class Board {
     return this.players[this.currentPlayerIndex];
   }
 
-  /** End the turn of the current player and move to the next player. */
-  public void endTurn() {
+  /**
+   * End the turn of the current player and move to the next player.
+   *
+   * @return whether the game is over.
+   */
+  public boolean endTurn() {
     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+    var backupIndex = this.currentPlayerIndex;
+    // Use a counter to prevent infinite loops
+    int counter = 0;
+    while (!this.players[this.currentPlayerIndex].isInGame() && counter < this.players.length) {
+      this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+      counter++;
+    }
+    return this.currentPlayerIndex == backupIndex;
   }
 
   /**
