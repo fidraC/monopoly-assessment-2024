@@ -76,6 +76,11 @@ public class Board {
    * @return the space the player landed on.
    */
   public int movePlayer(final int number) {
+    // If the player has looped around BUT not landed on the HomeSpace, we need to run
+    // the action of HomeSpace (collect money).
+    if (this.playerPositions[this.currentPlayerIndex] + number > this.spaces.length) {
+      this.spaces[0].action(this.players[this.currentPlayerIndex]);
+    }
     // Wrap around the board
     this.playerPositions[this.currentPlayerIndex] =
         (this.playerPositions[this.currentPlayerIndex] + number) % this.spaces.length;
