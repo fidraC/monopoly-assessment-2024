@@ -25,7 +25,7 @@ public class CommandLineChecks {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {10, 24, 35, 41, 48})
+  @ValueSource(ints = {10, 24, 35, 41, 48, 50})
   void testBoardRendering(int size) {
     Board board = new Board(size, new Player[0]);
     UserInterface ui = new CommandLineInterface(null);

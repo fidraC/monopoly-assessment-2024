@@ -5,7 +5,7 @@ package com.cm6123.monopoly.game;
  * is the sum of the player's roll if it is not a double, otherwise it is the value of one of the
  * dice.
  */
-public class TaxOfficeSpace extends Space {
+public class TaxOfficeSpace extends MustPaySpace {
 
   /**
    * The tax office takes a percentage of the player's balance that is the sum of their roll, unless
@@ -16,6 +16,22 @@ public class TaxOfficeSpace extends Space {
    */
   @Override
   public NextAction action(final Player player) {
+    final int tax = getFee(player);
+    if (player.deduct(tax)) {
+      return NextAction.END_TURN;
+    } else {
+      return NextAction.BANKRUPT;
+    }
+  }
+
+  /**
+   * The fee for the tax office is based on the player's roll.
+   *
+   * @param player the player landing on the space
+   * @return the fee for the tax office
+   */
+  @Override
+  public int getFee(final Player player) {
     final int[] roll = player.getLastRoll();
     int taxPercentage;
     if (roll[0] == roll[1]) {
@@ -23,13 +39,7 @@ public class TaxOfficeSpace extends Space {
     } else {
       taxPercentage = roll[0] + roll[1];
     }
-    final int tax = (int) Math.ceil(player.getBalance() * taxPercentage / 100.0);
-    if (player.deduct(tax)) {
-      return NextAction.END_TURN;
-    } else {
-      player.bankrupt(tax);
-      return NextAction.BANKRUPT;
-    }
+    return (int) Math.ceil(player.getBalance() * taxPercentage / 100.0);
   }
 
   /**

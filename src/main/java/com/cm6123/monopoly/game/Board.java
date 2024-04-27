@@ -17,7 +17,7 @@ public class Board {
         PropertySpace.class,
         PropertySpace.class,
         PropertySpace.class,
-        RoadSpace.class,
+        StationSpace.class,
         RoadSpace.class,
         TaxOfficeSpace.class,
         PropertySpace.class,
@@ -29,10 +29,10 @@ public class Board {
   private final Space[] spaces;
 
   /** The list of players on the board. */
-  private final Player[] players;
+  private Player[] players;
 
   /** The position of each player on the board. */
-  private final int[] playerPositions;
+  private int[] playerPositions;
 
   /** The index of the current player. */
   private int currentPlayerIndex;
@@ -69,6 +69,26 @@ public class Board {
   }
 
   /**
+   * Board constructor with no players. We can set players later so that we can render the board
+   * right after prompting for size.
+   *
+   * @param size the size of the board.
+   */
+  public Board(final int size) {
+    this(size, new Player[0]);
+  }
+
+  /**
+   * Sets the players on the board.
+   *
+   * @param playerList the list of players on the board.
+   */
+  public void setPlayers(final Player[] playerList) {
+    this.players = playerList;
+    this.playerPositions = new int[playerList.length];
+  }
+
+  /**
    * Moves the player by the given number and returns the space they landed on. This allows the game
    * object to run action on the player.
    *
@@ -102,8 +122,8 @@ public class Board {
    * @return whether the game is over.
    */
   public boolean endTurn() {
-    this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
     var backupIndex = this.currentPlayerIndex;
+    this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
     // Use a counter to prevent infinite loops
     int counter = 0;
     while (!this.players[this.currentPlayerIndex].isInGame() && counter < this.players.length) {

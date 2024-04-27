@@ -82,6 +82,19 @@ public class SpaceChecks {
     assertTrue(owner.getBalance() == initialBalance);
   }
 
+  // I missed a bug where the player would be allowed to buy an already owned property. This is to
+  // prevent regressions.
+  @Test
+  void testPropertyNextAction() {
+    Player player = new Player("Test Player");
+    Player owner = new Player("Owner");
+    PropertySpace space = new PropertySpace(200);
+    assertTrue(space.action(player) == NextAction.BUY);
+    space.buy(owner);
+    assertTrue(space.action(player) == NextAction.END_TURN);
+    assertTrue(space.action(owner) == NextAction.END_TURN);
+  }
+
   @Test
   void testTaxOfficeSpace() {
 

@@ -15,7 +15,7 @@ public class BoardChecks {
     Board board = new Board(50, new Player[] {player});
     assertTrue(board.getSpace(0).getName().equals("Home"));
     assertTrue(board.getSpace(9).getName().endsWith("Station"));
-    assertTrue(board.getSpace(49).getName().equals("Road"));
+    assertTrue(board.getSpace(49).getName().endsWith("Station"));
   }
 
   @Test
@@ -31,5 +31,15 @@ public class BoardChecks {
     // Wraparound
     board.endTurn();
     assertTrue(board.getCurrentPlayer() == player);
+  }
+
+  @Test
+  void testBankruptPlayer() {
+    Player player = new Player("Test Player");
+    Player player2 = new Player("Test Player 2");
+    player2.deduct(player2.getBalance());
+    player2.bankrupt(1);
+    Board board = new Board(50, new Player[] {player, player2});
+    assertTrue(board.endTurn());
   }
 }

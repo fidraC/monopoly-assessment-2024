@@ -86,13 +86,13 @@ public class Player {
       // We sell the property for half its value.
       var val = property.getValue() / 2;
       debt -= val;
-      if (debt < 0) {
+      if (debt <= 0) {
         // We add the remaining value to the player's balance.
         balance += Math.abs(debt);
         break;
       }
     }
-    this.inGame = debt == 0;
+    this.inGame = debt <= 0;
     return inGame;
   }
 

@@ -65,21 +65,22 @@ public class CommandLineInterface implements UserInterface {
           if (n < spaces.length) {
             return getSpaceInitial.run(spaces[n]);
           }
-          return ' ';
+          return '█';
         };
 
     int s = 0;
     int size = spaces.length - 4;
     int width = (int) Math.sqrt(size);
     int height = (int) Math.ceil((size - (width * 2)) / 2);
-    if ((width * 2) + (height * 2) + 4 != spaces.length) {
-      width++; // We can have blank spaces at the end
-    }
+
     // We want to save vertical space so if the board is too tall, we make it wider.
     if (width > 3) {
       // We give half the height to the width
-      width += height / 2;
+      width += (int) Math.ceil(height / 2);
       height = (int) Math.ceil(height / 2);
+    }
+    if ((width * 2) + (height * 2) + 4 != (spaces.length)) {
+      width = spaces.length - ((width * 2) + (height * 2) + 4) + width;
     }
     SeparatorFunction separator =
         (w) -> {
@@ -92,17 +93,15 @@ public class CommandLineInterface implements UserInterface {
     for (int i = 0; i < width + 2; i++) {
       System.out.print(getNextSpace.run(s++) + "█");
     }
-    // Bottom border
-    separator.run(width);
+
     // Left and right columns
     for (int i = 0; i < height; i++) {
       System.out.print("\n█");
       System.out.print(getNextSpace.run(s++) + "█");
-      System.out.print(" ".repeat((width * 2) - 1) + "█");
+      System.out.print("█".repeat((width * 2) - 1) + "█");
       System.out.print(getNextSpace.run(s++) + "█");
     }
     // Bottom row
-    separator.run(width);
     System.out.print("\n█");
     for (int i = 0; i < width + 2; i++) {
       System.out.print(getNextSpace.run(s++) + "█");

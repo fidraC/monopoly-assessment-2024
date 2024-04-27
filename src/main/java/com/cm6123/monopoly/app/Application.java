@@ -1,7 +1,8 @@
 package com.cm6123.monopoly.app;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.config.Configurator;
 
 /**
  * This is the main class for the monopoly game. It is purely a wrapper for the Monopoly game and
@@ -9,8 +10,6 @@ import org.slf4j.LoggerFactory;
  */
 public final class Application {
   /** Create a logger for the class. */
-  private static Logger logger = LoggerFactory.getLogger(Application.class);
-
   private Application() {}
 
   /**
@@ -21,7 +20,7 @@ public final class Application {
    */
   public static void main(final String[] args) {
 
-    logger.info("Application Started with args:{}", String.join(",", args));
+    Configurator.setAllLevels(LogManager.getRootLogger().getName(), Level.DEBUG);
 
     UserInterface ui = new CommandLineInterface(System.in);
 
@@ -33,7 +32,5 @@ public final class Application {
 
     var monopoly = new Monopoly(boardSize, ui);
     monopoly.gameLoop();
-
-    logger.info("Application closing");
   }
 }

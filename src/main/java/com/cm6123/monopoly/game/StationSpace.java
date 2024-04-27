@@ -6,7 +6,7 @@ import java.util.Locale;
 /**
  * Unlike the real monopoly, the station cannot be bought. Players pay a fee when they land on it.
  */
-public class StationSpace extends Space {
+public class StationSpace extends MustPaySpace {
   /** The unit fee per distance traveled. */
   private final int fee;
 
@@ -14,13 +14,13 @@ public class StationSpace extends Space {
   private final String stationName;
 
   /** The minimum unit fee of the station. */
-  private static final int MIN_UNIT_FEE = 5; // 5 * 2 = 10
+  private static final int MIN_UNIT_FEE = 10;
 
   /**
    * The maximum unit fee of the station. This is made to try and match the maximum rent of a
    * property (50)
    */
-  private static final int MAX_UNIT_FEE = 10; // 10 * 12 = 120
+  private static final int MAX_UNIT_FEE = 20;
 
   /**
    * Creates a new station space with a fee.
@@ -46,13 +46,24 @@ public class StationSpace extends Space {
    */
   @Override
   public NextAction action(final Player player) {
-    final int sum = player.getLastRoll()[0] + player.getLastRoll()[1];
-    if (player.deduct(fee * sum)) {
+    final int totalFee = getFee(player);
+    if (player.deduct(totalFee)) {
       return NextAction.END_TURN;
     } else {
-      player.bankrupt(fee * sum);
       return NextAction.BANKRUPT;
     }
+  }
+
+  /**
+   * Returns the fee that the player must pay.
+   *
+   * @param player the player landing on the space.
+   * @return the fee that the player must pay.
+   */
+  @Override
+  public int getFee(final Player player) {
+    final int sum = player.getLastRoll()[0] + player.getLastRoll()[1];
+    return fee * sum;
   }
 
   /**

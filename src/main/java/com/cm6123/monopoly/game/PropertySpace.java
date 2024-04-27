@@ -57,7 +57,7 @@ public final class PropertySpace extends Space {
    *
    * @return the rent value.
    */
-  private int getRent() {
+  public int getRent() {
     return this.value * RENT_PERCENTAGE / 100;
   }
 
@@ -75,12 +75,12 @@ public final class PropertySpace extends Space {
       if (player.deduct(this.getRent())) {
         return NextAction.END_TURN;
       } else {
-        player.bankrupt(this.getRent());
         return NextAction.BANKRUPT;
       }
-    } else {
+    } else if (this.owner == null) {
       return NextAction.BUY;
     }
+    return NextAction.END_TURN;
   }
 
   /**
