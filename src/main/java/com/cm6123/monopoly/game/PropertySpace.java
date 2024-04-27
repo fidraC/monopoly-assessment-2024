@@ -75,6 +75,7 @@ public final class PropertySpace extends Space {
       if (player.deduct(this.getRent())) {
         return NextAction.END_TURN;
       } else {
+        player.bankrupt(this.getRent());
         return NextAction.BANKRUPT;
       }
     } else {

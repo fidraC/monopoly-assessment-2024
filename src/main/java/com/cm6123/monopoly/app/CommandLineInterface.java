@@ -1,5 +1,7 @@
-package com.cm6123.monopoly.game;
+package com.cm6123.monopoly.app;
 
+import com.cm6123.monopoly.game.Board;
+import com.cm6123.monopoly.game.Space;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -40,7 +42,77 @@ public class CommandLineInterface implements UserInterface {
    */
   @Override
   public void renderBoard(final Board board) {
-    // TODO: Render the board somehow
+    interface SpaceInitialFunction {
+      char run(Space space);
+    }
+
+    interface SeparatorFunction {
+      void run(int width);
+    }
+
+    interface NextSpaceFunction {
+      char run(int n);
+    }
+
+    Space[] spaces = board.getSpaces();
+    SpaceInitialFunction getSpaceInitial =
+        (space) -> {
+          return space.getClass().getSimpleName().charAt(0);
+        };
+
+    NextSpaceFunction getNextSpace =
+        (n) -> {
+          if (n < spaces.length) {
+            return getSpaceInitial.run(spaces[n]);
+          }
+          return ' ';
+        };
+
+    int s = 0;
+    int size = spaces.length - 4;
+    int width = (int) Math.sqrt(size);
+    int height = (int) Math.ceil((size - (width * 2)) / 2);
+    if ((width * 2) + (height * 2) + 4 != spaces.length) {
+      width++; // We can have blank spaces at the end
+    }
+    // We want to save vertical space so if the board is too tall, we make it wider.
+    if (width > 3) {
+      // We give half the height to the width
+      width += height / 2;
+      height = (int) Math.ceil(height / 2);
+    }
+    SeparatorFunction separator =
+        (w) -> {
+          System.out.print("\n" + "█".repeat((w + 2) * 2 + 1));
+        };
+    // Top border
+    separator.run(width);
+    // Top row
+    System.out.print("\n█");
+    for (int i = 0; i < width + 2; i++) {
+      System.out.print(getNextSpace.run(s++) + "█");
+    }
+    // Bottom border
+    separator.run(width);
+    // Left and right columns
+    for (int i = 0; i < height; i++) {
+      System.out.print("\n█");
+      System.out.print(getNextSpace.run(s++) + "█");
+      System.out.print(" ".repeat((width * 2) - 1) + "█");
+      System.out.print(getNextSpace.run(s++) + "█");
+    }
+    // Bottom row
+    separator.run(width);
+    System.out.print("\n█");
+    for (int i = 0; i < width + 2; i++) {
+      System.out.print(getNextSpace.run(s++) + "█");
+    }
+    separator.run(width);
+    System.out.println();
+    if (s < spaces.length) {
+      throw new RuntimeException(
+          "Did not render all spaces. Expected: " + spaces.length + " Rendered: " + s);
+    }
   }
 
   /**

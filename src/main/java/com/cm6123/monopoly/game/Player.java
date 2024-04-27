@@ -3,9 +3,14 @@ package com.cm6123.monopoly.game;
 import com.cm6123.monopoly.dice.Dice;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /** The player class represents a player in the game. */
 public class Player {
+  /** The logger for the player class. */
+  private static final Logger LOGGER = LogManager.getLogger(Player.class);
+
   /** The starting balance for a player. */
   private static final int STARTING_BALANCE = 1000;
 
@@ -62,6 +67,7 @@ public class Player {
     }
 
     properties.add(insertionIndex, property);
+    LOGGER.info(property.getName() + " successfully bought by player: " + property.getName());
   }
 
   /**
@@ -76,6 +82,7 @@ public class Player {
     while (debt > 0 && properties.size() > 0) {
       PropertySpace property = properties.remove(0);
       property.removeOwner();
+      LOGGER.info(property.getName() + " sold due to bankruptcy by player: " + property.getName());
       // We sell the property for half its value.
       var val = property.getValue() / 2;
       debt -= val;
@@ -107,6 +114,7 @@ public class Player {
   public boolean deduct(final int amount) {
     if (balance >= amount) {
       balance -= amount;
+      LOGGER.info("Player: " + name + " paid " + amount + " and now has " + balance);
       return true;
     }
     return false;
@@ -119,6 +127,7 @@ public class Player {
    */
   public void add(final int amount) {
     balance += amount;
+    LOGGER.info("Player: " + name + " received " + amount + " and now has " + balance);
   }
 
   /**

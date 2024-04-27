@@ -50,6 +50,7 @@ public class StationSpace extends Space {
     if (player.deduct(fee * sum)) {
       return NextAction.END_TURN;
     } else {
+      player.bankrupt(fee * sum);
       return NextAction.BANKRUPT;
     }
   }

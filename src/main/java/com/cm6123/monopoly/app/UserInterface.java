@@ -1,4 +1,6 @@
-package com.cm6123.monopoly.game;
+package com.cm6123.monopoly.app;
+
+import com.cm6123.monopoly.game.Board;
 
 /**
  * This is the generic interface for implementing a UI for user interaction. This is to allow easy

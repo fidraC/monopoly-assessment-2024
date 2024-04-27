@@ -122,4 +122,13 @@ public class Board {
   public Space getSpace(final int index) {
     return this.spaces[index];
   }
+
+  /**
+   * Gets the array of all spaces on the board. Used for rendering the board.
+   *
+   * @return the array of all spaces on the board.
+   */
+  public Space[] getSpaces() {
+    return this.spaces;
+  }
 }

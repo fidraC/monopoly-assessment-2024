@@ -27,6 +27,7 @@ public class TaxOfficeSpace extends Space {
     if (player.deduct(tax)) {
       return NextAction.END_TURN;
     } else {
+      player.bankrupt(tax);
       return NextAction.BANKRUPT;
     }
   }

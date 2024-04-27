@@ -2,8 +2,8 @@ package com.cm6123.monopoly;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.cm6123.monopoly.game.CommandLineInterface;
-import com.cm6123.monopoly.game.Monopoly;
+import com.cm6123.monopoly.app.CommandLineInterface;
+import com.cm6123.monopoly.app.Monopoly;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.Test;
