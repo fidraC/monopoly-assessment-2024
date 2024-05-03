@@ -69,19 +69,17 @@ public class CommandLineInterface implements UserInterface {
         };
 
     int s = 0;
-    int size = spaces.length - 4;
+    int size = spaces.length - 4 - 1; // 4 for corners, 1 because we start at 0
     int width = (int) Math.sqrt(size);
-    int height = (int) Math.ceil((size - (width * 2)) / 2);
+    int height = (int) (size - (width * 2)) / 2;
 
     // We want to save vertical space so if the board is too tall, we make it wider.
     if (width > 3) {
       // We give half the height to the width
-      width += (int) Math.ceil(height / 2);
-      height = (int) Math.ceil(height / 2);
+      width += (int) height / 2;
+      height = (int) height / 2;
     }
-    if ((width * 2) + (height * 2) + 4 != (spaces.length)) {
-      width = spaces.length - ((width * 2) + (height * 2) + 4) + width;
-    }
+
     SeparatorFunction separator =
         (w) -> {
           System.out.print("\n" + "█".repeat((w + 2) * 2 + 1));
@@ -95,7 +93,7 @@ public class CommandLineInterface implements UserInterface {
     }
 
     // Left and right columns
-    for (int i = 0; i < height; i++) {
+    for (int i = 0; i < height + 2; i++) {
       System.out.print("\n█");
       System.out.print(getNextSpace.run(s++) + "█");
       System.out.print("█".repeat((width * 2) - 1) + "█");

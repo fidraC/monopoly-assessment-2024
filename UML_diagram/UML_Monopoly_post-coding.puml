@@ -1,0 +1,299 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.cm6123.monopoly.app.Application",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1358360154 { 
+   	label=cm6123
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_71238775 { 
+   	label=monopoly
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Application220172349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Application</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Board1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Board</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   currentPlayerIndex: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   playerPositions: int[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   players: Player[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spaces: Space[] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ endTurn(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSpace(index: int): Space</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePlayer(number: int): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CommandLineInterface220172349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CommandLineInterface</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   scanner: Scanner [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ displayMessage(message: String, options: String...)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDouble(prompt: String): Double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getInteger(prompt: String): Integer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getString(prompt: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ promptForChoice(choices: String[]): Integer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ renderBoard(board: Board)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Dice1764509429[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Dice</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   faces: Integer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ roll(): Integer</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Monopoly220172349[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Monopoly</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ui: UserInterface [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ gameLoop()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MustPaySpace1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MustPaySpace</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ getFee(player: Player): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Player1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Player</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   balance: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   inGame: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastRoll: int[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   properties: List&lt;PropertySpace&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(amount: int)</TD></TR>
+<TR><TD ALIGN="LEFT" ># addProperty(property: PropertySpace)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ bankrupt(debts: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deduct(amount: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ roll()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PropertySpace1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PropertySpace</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   owner: Player [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   propertyName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   value: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ action(player: Player): NextAction</TD></TR>
+<TR><TD ALIGN="LEFT" ># canBuy(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># internalBuy(player: Player): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeOwner()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Space1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Space</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ action(player: Player): NextAction</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buy(player: Player): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># canBuy(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># internalBuy(player: Player): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StationSpace1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StationSpace</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   fee: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stationName: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ action(player: Player): NextAction</TD></TR>
+<TR><TD ALIGN="LEFT" ># canBuy(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getFee(player: Player): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TaxOfficeSpace1764427434[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TaxOfficeSpace</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ action(player: Player): NextAction</TD></TR>
+<TR><TD ALIGN="LEFT" ># canBuy(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getFee(player: Player): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Application220172349 -> CommandLineInterface220172349[arrowhead=none];
+Application220172349 -> Monopoly220172349[label="main() -> gameLoop()"];
+Board1764427434 -> Player1764427434[label="players
+[0..*]"];
+Board1764427434 -> Space1764427434[label="spaces
+[0..*]"];
+Monopoly220172349 -> Board1764427434[label="board
+[0..1]"];
+MustPaySpace1764427434 -> StationSpace1764427434[arrowhead=none, arrowtail=empty, dir=both];
+MustPaySpace1764427434 -> TaxOfficeSpace1764427434[arrowhead=none, arrowtail=empty, dir=both];
+Player1764427434 -> PropertySpace1764427434[label="properties
+[0..1]"];
+PropertySpace1764427434 -> Player1764427434[label="owner
+[0..1]"];
+Space1764427434 -> MustPaySpace1764427434[arrowhead=none, arrowtail=empty, dir=both];
+Space1764427434 -> PropertySpace1764427434[arrowhead=none, arrowtail=empty, dir=both];
+StationSpace1764427434 -> Player1764427434[label="action() -> deduct()"];
+TaxOfficeSpace1764427434 -> Player1764427434[label="action() -> deduct()"];
+    
+}
+@enduml
