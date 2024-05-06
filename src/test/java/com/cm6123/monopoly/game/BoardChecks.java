@@ -39,4 +39,14 @@ public class BoardChecks {
     Board board = new Board(50, new Player[] {player, player2});
     assertTrue(board.endTurn());
   }
+
+  @Test
+  void testCollectHome() {
+    Player player = new Player("Test Player");
+    Board board = new Board(10, new Player[] {player});
+    board.movePlayer(11);
+    assertTrue(player.getBalance() == 1200);
+    board.movePlayer(15);
+    assertTrue(player.getBalance() == 1400);
+  }
 }
