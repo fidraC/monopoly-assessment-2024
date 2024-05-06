@@ -1,10 +1,7 @@
-package com.cm6123.monopoly;
+package com.cm6123.monopoly.game;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cm6123.monopoly.game.Board;
-import com.cm6123.monopoly.game.NextAction;
-import com.cm6123.monopoly.game.Player;
 import org.junit.jupiter.api.Test;
 
 /** Tests for the Board class. */

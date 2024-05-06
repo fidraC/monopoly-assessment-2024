@@ -101,7 +101,7 @@ public class Player {
    *
    * @return whether the player is still in the game.
    */
-  public boolean isInGame() {
+  protected boolean isInGame() {
     return inGame;
   }
 
@@ -111,7 +111,7 @@ public class Player {
    * @param amount the amount to deduct.
    * @return true if the player had enough money to deduct the amount, false otherwise.
    */
-  public boolean deduct(final int amount) {
+  protected boolean deduct(final int amount) {
     if (balance >= amount) {
       balance -= amount;
       LOGGER.info("Player: " + name + " paid " + amount + " and now has " + balance);
@@ -125,7 +125,7 @@ public class Player {
    *
    * @param amount the amount to add.
    */
-  public void add(final int amount) {
+  protected void add(final int amount) {
     balance += amount;
     LOGGER.info("Player: " + name + " received " + amount + " and now has " + balance);
   }

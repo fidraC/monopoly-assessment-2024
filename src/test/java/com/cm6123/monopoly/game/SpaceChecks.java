@@ -1,14 +1,7 @@
-package com.cm6123.monopoly;
+package com.cm6123.monopoly.game;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cm6123.monopoly.game.HomeSpace;
-import com.cm6123.monopoly.game.NextAction;
-import com.cm6123.monopoly.game.Player;
-import com.cm6123.monopoly.game.PropertySpace;
-import com.cm6123.monopoly.game.RoadSpace;
-import com.cm6123.monopoly.game.StationSpace;
-import com.cm6123.monopoly.game.TaxOfficeSpace;
 import org.junit.jupiter.api.Test;
 
 /** Tests for the Space class. */
