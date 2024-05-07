@@ -43,16 +43,6 @@ public class TaxOfficeSpace extends MustPaySpace {
   }
 
   /**
-   * The tax office cannot be bought.
-   *
-   * @return false.
-   */
-  @Override
-  boolean canBuy() {
-    return false;
-  }
-
-  /**
    * The name of the space is "Tax Office".
    *
    * @return "Tax Office".

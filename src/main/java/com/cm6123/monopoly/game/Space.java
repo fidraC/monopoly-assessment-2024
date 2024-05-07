@@ -21,7 +21,9 @@ public abstract class Space {
    *
    * @return true if the player can buy the space, false otherwise.
    */
-  abstract boolean canBuy();
+  boolean canBuy() {
+    return false;
+  }
 
   /**
    * An internal method to be extended to buy the space. This will be called by the buy method if

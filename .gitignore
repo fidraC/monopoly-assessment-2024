@@ -1,5 +1,5 @@
 .classpath
-.log.gz
+*.log.gz
 .project
 .settings/
 # Created by .ignore support plugin (hsz.mobi)

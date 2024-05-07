@@ -1,8 +1,7 @@
-package com.cm6123.monopoly;
+package com.cm6123.monopoly.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.cm6123.monopoly.app.CommandLineInterface;
 import com.cm6123.monopoly.game.Board;
 import com.cm6123.monopoly.game.Player;
 import java.io.ByteArrayInputStream;

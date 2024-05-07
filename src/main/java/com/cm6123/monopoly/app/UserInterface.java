@@ -6,7 +6,7 @@ import com.cm6123.monopoly.game.Board;
  * This is the generic interface for implementing a UI for user interaction. This is to allow easy
  * testing and future expansion from a TUI to GUI,
  */
-interface UserInterface {
+public interface UserInterface {
   /**
    * Displays a message to the user.
    *

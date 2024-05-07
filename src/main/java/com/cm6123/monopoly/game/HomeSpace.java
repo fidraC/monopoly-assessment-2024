@@ -16,12 +16,6 @@ public final class HomeSpace extends Space {
     return NextAction.END_TURN;
   }
 
-  /** The player cannot buy the home space. */
-  @Override
-  boolean canBuy() {
-    return false;
-  }
-
   /**
    * The name of the space is "Home". It really really really should be self explanatory I don't
    * know why checkstyle does this to me.

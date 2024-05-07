@@ -17,16 +17,6 @@ public class RoadSpace extends Space {
   }
 
   /**
-   * Cannot be bought.
-   *
-   * @return false
-   */
-  @Override
-  boolean canBuy() {
-    return false;
-  }
-
-  /**
    * The name of the road.
    *
    * @return the name of the road.

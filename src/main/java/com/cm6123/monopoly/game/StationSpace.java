@@ -67,16 +67,6 @@ public class StationSpace extends MustPaySpace {
   }
 
   /**
-   * Cannot be bought.
-   *
-   * @return false
-   */
-  @Override
-  boolean canBuy() {
-    return false;
-  }
-
-  /**
    * The name of the station.
    *
    * @return the name of the station.

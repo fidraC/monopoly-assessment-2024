@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /** This is the simple text-based implementation of the UserInterface. */
-public class CommandLineInterface implements UserInterface {
+class CommandLineInterface implements UserInterface {
 
   /** System input scanner. */
   private final Scanner scanner;
@@ -16,7 +16,7 @@ public class CommandLineInterface implements UserInterface {
    *
    * @param in the input source for the scanner. Use stdin if null.
    */
-  public CommandLineInterface(final InputStream in) {
+  CommandLineInterface(final InputStream in) {
     if (in == null) {
       this.scanner = new Scanner(System.in);
     } else {
